@@ -25,7 +25,7 @@ import UIKit
 import Photos
 
 class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
+    
     //MARK: Properties
     @IBOutlet weak var darkView: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -76,7 +76,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
         self.registerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         self.registerView.layer.cornerRadius = 8
     }
-   
+    
     func cloundsAnimation() {
         let distance = self.view.bounds.width - self.cloudsView.bounds.width
         self.cloudsViewLeading.constant = distance
@@ -89,11 +89,11 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
         if state {
             self.darkView.isHidden = false
             self.spinner.startAnimating()
-            UIView.animate(withDuration: 0.3, animations: { 
+            UIView.animate(withDuration: 0.3, animations: {
                 self.darkView.alpha = 0.5
             })
         } else {
-            UIView.animate(withDuration: 0.3, animations: { 
+            UIView.animate(withDuration: 0.3, animations: {
                 self.darkView.alpha = 0
             }, completion: { _ in
                 self.spinner.stopAnimating()

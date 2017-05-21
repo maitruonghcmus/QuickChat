@@ -32,7 +32,7 @@ class LandingVC: UIViewController {
             return UIInterfaceOrientationMask.portrait
         }
     }
-
+    
     //MARK: Push to relevant ViewController
     func pushTo(viewController: ViewControllerType)  {
         switch viewController {
@@ -65,7 +65,7 @@ class LandingVC: UIViewController {
             self.pushTo(viewController: .welcome)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

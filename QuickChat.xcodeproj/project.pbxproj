@@ -74,7 +74,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
+		224AFA9E1D868371004E7CCD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				2274709D1DCCF9BF00645401 /* LandingVC.swift */,
@@ -84,7 +84,7 @@
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
 				22EA57901E1D32520008FFB2 /* VCCells.swift */,
 			);
-			name = ViewControllers;
+			name = Controller;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -117,15 +117,15 @@
 		22A92BAF1D59EBD6005D76F7 /* QuickChat */ = {
 			isa = PBXGroup;
 			children = (
-				1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */,
-				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
-				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
-				224AFA9E1D868371004E7CCD /* ViewControllers */,
+				B1AC9EAD1ED1A0D0001E25B4 /* Resources */,
 				224834AF1DB539690019153C /* Model */,
+				B1AC9EAC1ED1A067001E25B4 /* View */,
+				224AFA9E1D868371004E7CCD /* Controller */,
 				224AFAAA1D86900B004E7CCD /* Helper Files */,
-				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
+				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
+				1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
-				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
+				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 			);
 			path = QuickChat;
 			sourceTree = "<group>";
@@ -146,6 +146,22 @@
 				B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B1AC9EAC1ED1A067001E25B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B1AC9EAD1ED1A0D0001E25B4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

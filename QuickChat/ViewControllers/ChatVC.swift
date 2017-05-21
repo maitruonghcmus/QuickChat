@@ -50,7 +50,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     var currentUser: User?
     var canSendLocation = true
     
-
+    
     //MARK: Methods
     func customization() {
         self.imagePicker.delegate = self
@@ -122,7 +122,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     @IBAction func showMessage(_ sender: Any) {
-       self.animateExtraButtons(toHide: true)
+        self.animateExtraButtons(toHide: true)
     }
     
     @IBAction func selectGallery(_ sender: Any) {
@@ -179,7 +179,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
     }
-
+    
     //MARK: Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
@@ -296,7 +296,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
     }
-
+    
     //MARK: ViewController lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -26,7 +26,7 @@ import Firebase
 import MapKit
 
 class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
-
+    
     //MARK: Properties
     @IBOutlet var contactsView: UIView!
     @IBOutlet var profileView: UIView!
@@ -55,7 +55,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.darkView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.darkView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.darkView.isHidden = true
-    //ContainerView customization
+        //ContainerView customization
         let extraViewsContainer = UIView.init()
         extraViewsContainer.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(extraViewsContainer)
@@ -65,7 +65,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         extraViewsContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         extraViewsContainer.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
         extraViewsContainer.backgroundColor = UIColor.clear
-    //ContactsView customization
+        //ContactsView customization
         extraViewsContainer.addSubview(self.contactsView)
         self.contactsView.translatesAutoresizingMaskIntoConstraints = false
         self.contactsView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
@@ -75,7 +75,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.contactsView.isHidden = true
         self.collectionView?.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
         self.contactsView.backgroundColor = UIColor.clear
-    //ProfileView Customization
+        //ProfileView Customization
         extraViewsContainer.addSubview(self.profileView)
         self.profileView.translatesAutoresizingMaskIntoConstraints = false
         self.profileView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 0.9)).isActive = true
@@ -89,7 +89,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.profilePicView.layer.borderColor = GlobalVariables.purple.cgColor
         self.profilePicView.layer.borderWidth = 3
         self.view.layoutIfNeeded()
-    //PreviewView Customization
+        //PreviewView Customization
         extraViewsContainer.addSubview(self.previewView)
         self.previewView.isHidden = true
         self.previewView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +99,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.previewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.0
-    //MapPreView Customization
+        //MapPreView Customization
         extraViewsContainer.addSubview(self.mapPreviewView)
         self.mapPreviewView.isHidden = true
         self.mapPreviewView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
         self.fetchUsers()
         self.fetchUserInfo()
-
+        
     }
     
     //Hide Extra views
@@ -217,7 +217,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     @IBAction func closeView(_ sender: Any) {
         self.dismissExtraViews()
     }
-  
+    
     @IBAction func logOutUser(_ sender: Any) {
         User.logOutUser { (status) in
             if status == true {
@@ -234,7 +234,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             return self.items.count
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if self.items.count == 0 {
             let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "Empty Cell", for: indexPath)
@@ -248,7 +248,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.items.count > 0 {
             self.dismissExtraViews()
@@ -285,16 +285,16 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.previewImageView
     }
-
+    
     //MARK: ViewController lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.customization()        
+        self.customization()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.view.transform = CGAffineTransform.identity
-    }    
+    }
 }
 
 
