@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YU4-6K-4QF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YU4-6K-4QF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,7 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ds1-sN-QMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-608.79999999999995" y="428.63568215892059"/>
+            <point key="canvasLocation" x="-1838" y="429"/>
         </scene>
         <!--WelcomeVC-->
         <scene sceneID="Gs1-m1-RGK">
@@ -126,11 +126,11 @@
                         <outlet property="spinner" destination="b3E-sR-X8y" id="G2n-1r-jdg"/>
                         <outletCollection property="waringLabels" destination="aBA-he-i3z" collectionClass="NSMutableArray" id="1Dt-un-JpK"/>
                         <outletCollection property="waringLabels" destination="O5g-Mk-Irl" collectionClass="NSMutableArray" id="bVM-Mf-GdQ"/>
-                        <outletCollection property="inputFields" destination="ysO-kC-tfW" id="Eqq-cj-Od8"/>
-                        <outletCollection property="inputFields" destination="HqN-BY-obZ" id="sKF-h0-9ak"/>
-                        <outletCollection property="inputFields" destination="MbO-OW-uK3" id="Kdy-2c-E3Y"/>
-                        <outletCollection property="inputFields" destination="Ecv-9h-ZWB" id="0WE-ZX-Wyh"/>
-                        <outletCollection property="inputFields" destination="12N-yZ-eQF" id="8YP-mT-7qC"/>
+                        <outletCollection property="inputFields" destination="ysO-kC-tfW" collectionClass="NSMutableArray" id="Eqq-cj-Od8"/>
+                        <outletCollection property="inputFields" destination="HqN-BY-obZ" collectionClass="NSMutableArray" id="sKF-h0-9ak"/>
+                        <outletCollection property="inputFields" destination="MbO-OW-uK3" collectionClass="NSMutableArray" id="Kdy-2c-E3Y"/>
+                        <outletCollection property="inputFields" destination="Ecv-9h-ZWB" collectionClass="NSMutableArray" id="0WE-ZX-Wyh"/>
+                        <outletCollection property="inputFields" destination="12N-yZ-eQF" collectionClass="NSMutableArray" id="8YP-mT-7qC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ub0-iA-SeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -451,7 +451,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="85.599999999999994" y="428.63568215892059"/>
+            <point key="canvasLocation" x="-766" y="429"/>
         </scene>
         <!-- -->
         <scene sceneID="sN9-4N-rjq">
@@ -594,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUK-CG-8g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="429"/>
+            <point key="canvasLocation" x="2470" y="429"/>
         </scene>
         <!--Chat-->
         <scene sceneID="j8s-t8-l2W">
@@ -866,7 +866,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2468" y="429"/>
+            <point key="canvasLocation" x="3409" y="429"/>
         </scene>
         <!--NavVC-->
         <scene sceneID="bKx-7C-iuV">
@@ -1153,7 +1153,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="823" y="429"/>
+            <point key="canvasLocation" x="988" y="429"/>
         </scene>
     </scenes>
     <resources>
