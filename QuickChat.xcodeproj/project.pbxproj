@@ -94,12 +94,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		224AFAAA1D86900B004E7CCD /* Helper Files */ = {
+		224AFAAA1D86900B004E7CCD /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				220698831E066E4900F2284B /* Helper Files.swift */,
 			);
-			name = "Helper Files";
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		22A92BA41D59EBD5005D76F7 = {
@@ -123,11 +123,11 @@
 		22A92BAF1D59EBD6005D76F7 /* QuickChat */ = {
 			isa = PBXGroup;
 			children = (
-				B1AC9EAD1ED1A0D0001E25B4 /* Resources */,
+				B1AC9EAD1ED1A0D0001E25B4 /* Sound */,
 				224834AF1DB539690019153C /* Model */,
 				B1AC9EAC1ED1A067001E25B4 /* View */,
 				224AFA9E1D868371004E7CCD /* Controller */,
-				224AFAAA1D86900B004E7CCD /* Helper Files */,
+				224AFAAA1D86900B004E7CCD /* Helper */,
 				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
 				1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
@@ -162,12 +162,12 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		B1AC9EAD1ED1A0D0001E25B4 /* Resources */ = {
+		B1AC9EAD1ED1A0D0001E25B4 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
 				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
 			);
-			name = Resources;
+			name = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
