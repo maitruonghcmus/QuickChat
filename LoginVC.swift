@@ -19,8 +19,9 @@ class LoginVC: UIViewController {
     // MARK: - Custom func
     
     func pushTomainView() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
-        self.show(vc, sender: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: false, completion: nil)
     }
 
     // MARK: - Event

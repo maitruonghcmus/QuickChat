@@ -1,25 +1,10 @@
-//  MIT License
-
-//  Copyright (c) 2017 Haik Aslanyan
-
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
-
+//
+//  LoginVC.swift
+//  QuickChat
+//
+//  Created by Truong Mai on 5/23/17.
+//  Copyright © 2017 Mexonis. All rights reserved.
+//
 
 import UIKit
 import Firebase
@@ -55,6 +40,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.darkView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.darkView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.darkView.isHidden = true
+        
         //ContainerView customization
         let extraViewsContainer = UIView.init()
         extraViewsContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +51,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         extraViewsContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         extraViewsContainer.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
         extraViewsContainer.backgroundColor = UIColor.clear
+        
         //ContactsView customization
         extraViewsContainer.addSubview(self.contactsView)
         self.contactsView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +62,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.contactsView.isHidden = true
         self.collectionView?.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
         self.contactsView.backgroundColor = UIColor.clear
+        
         //ProfileView Customization
         extraViewsContainer.addSubview(self.profileView)
         self.profileView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +77,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.profilePicView.layer.borderColor = GlobalVariables.purple.cgColor
         self.profilePicView.layer.borderWidth = 3
         self.view.layoutIfNeeded()
+        
         //PreviewView Customization
         extraViewsContainer.addSubview(self.previewView)
         self.previewView.isHidden = true
@@ -99,6 +88,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.previewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.0
+        
         //MapPreView Customization
         extraViewsContainer.addSubview(self.mapPreviewView)
         self.mapPreviewView.isHidden = true
@@ -107,6 +97,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.mapPreviewView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
         self.mapPreviewView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
         self.mapPreviewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
+        
         //NotificationCenter for showing extra views
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
         self.fetchUsers()

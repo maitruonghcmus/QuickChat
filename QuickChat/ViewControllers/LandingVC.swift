@@ -20,33 +20,34 @@ class LandingVC: UIViewController {
             User.loginUser(withEmail: email, password: password, completion: { [weak weakSelf = self] (status) in
                 DispatchQueue.main.async {
                     if status == true {
-                        weakSelf?.pushTo(viewController: .conversations)
+                        weakSelf?.pushTo(viewController: .tabbar)
                     } else {
-                        weakSelf?.pushTo(viewController: .welcome)
+                        weakSelf?.pushTo(viewController: .login)
                     }
                     weakSelf = nil
                 }
             })
         }
         else {
-            self.pushTo(viewController: .welcome)
+            self.pushTo(viewController: .login)
         }
     }
     
     //Push to ViewController
     func pushTo(viewController: ViewControllerType)  {
         switch viewController {
-        case .conversations:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
+        case .tabbar:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
             self.present(vc, animated: false, completion: nil)
-        case .welcome:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome") as! WelcomeVC
+        case .login:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.present(vc, animated: false, completion: nil)
+        default:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
             self.present(vc, animated: false, completion: nil)
         }
     }
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

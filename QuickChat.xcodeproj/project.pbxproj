@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1150B2511ECC2A8C00D6DC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */; };
+		117DDDE11ED53A6500067713 /* ConversVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE01ED53A6500067713 /* ConversVC.swift */; };
+		117DDDE31ED53AC900067713 /* ContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE21ED53AC900067713 /* ContactVC.swift */; };
+		117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE41ED53B0B00067713 /* ProfileVC.swift */; };
+		117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE61ED53CFE00067713 /* TabVC.swift */; };
 		11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */; };
 		11FAB6BD1ED422AB00299AD0 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */; };
 		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
@@ -30,6 +34,10 @@
 
 /* Begin PBXFileReference section */
 		1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		117DDDE01ED53A6500067713 /* ConversVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversVC.swift; path = QuickChat/ViewControllers/ConversVC.swift; sourceTree = "<group>"; };
+		117DDDE21ED53AC900067713 /* ContactVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactVC.swift; path = QuickChat/ViewControllers/ContactVC.swift; sourceTree = "<group>"; };
+		117DDDE41ED53B0B00067713 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = QuickChat/ViewControllers/ProfileVC.swift; sourceTree = "<group>"; };
+		117DDDE61ED53CFE00067713 /* TabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabVC.swift; path = QuickChat/ViewControllers/TabVC.swift; sourceTree = "<group>"; };
 		11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
@@ -89,6 +97,10 @@
 				22EA57901E1D32520008FFB2 /* VCCells.swift */,
 				11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */,
 				11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */,
+				117DDDE01ED53A6500067713 /* ConversVC.swift */,
+				117DDDE21ED53AC900067713 /* ContactVC.swift */,
+				117DDDE41ED53B0B00067713 /* ProfileVC.swift */,
+				117DDDE61ED53CFE00067713 /* TabVC.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -307,10 +319,14 @@
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
 				11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */,
 				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
+				117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */,
+				117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */,
 				22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */,
+				117DDDE11ED53A6500067713 /* ConversVC.swift in Sources */,
 				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
+				117DDDE31ED53AC900067713 /* ContactVC.swift in Sources */,
 				220698841E066E4900F2284B /* Helper Files.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
 				22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */,
