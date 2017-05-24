@@ -916,7 +916,6 @@
                     <connections>
                         <outlet property="alertBottomConstraint" destination="1Rg-Ry-AA5" id="QJG-EI-WP4"/>
                         <outlet property="tableView" destination="Plb-lE-iQb" id="fbw-5y-CY2"/>
-                        <segue destination="j4r-Rx-g1K" kind="show" identifier="segue" id="Th6-3L-hdh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUK-CG-8g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1193,7 +1192,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="4142" y="429"/>
+            <point key="canvasLocation" x="5671" y="1666"/>
         </scene>
         <!--NavVC-->
         <scene sceneID="bKx-7C-iuV">
@@ -1549,6 +1548,9 @@
                     <navigationItem key="navigationItem" title="Contacts" id="gre-PN-8Nl">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="v2u-fM-lVR"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="j4r-Rx-g1K" kind="show" identifier="ContactToChatSegueID" id="jUC-Oj-ixI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABw-pV-lIZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1663,6 +1665,6 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ufd-Zi-rRU"/>
+        <segue reference="jUC-Oj-ixI"/>
     </inferredMetricsTieBreakers>
 </document>
