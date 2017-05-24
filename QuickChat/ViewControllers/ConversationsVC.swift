@@ -28,16 +28,20 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //MARK: Methods
     func customization()  {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
         //NavigationBar customization
         let navigationTitleFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
+        
         // notification setup
         NotificationCenter.default.addObserver(self, selector: #selector(self.pushToUserMesssages(notification:)), name: NSNotification.Name(rawValue: "showUserMessages"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showEmailAlert), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        
         //right bar button
         let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.showContacts))
         self.navigationItem.rightBarButtonItem = rightButton
+        
         //left bar button image fetching
         self.navigationItem.leftBarButtonItem = self.leftButton
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
