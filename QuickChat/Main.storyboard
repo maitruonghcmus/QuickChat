@@ -1515,7 +1515,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="qTQ-uF-Dyn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactsCell" rowHeight="80" id="qTQ-uF-Dyn" customClass="ContactsCell" customModule="QuickChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTQ-uF-Dyn" id="rlv-MK-0ch">
@@ -1535,6 +1535,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="EhV-UP-fyR" id="o8U-xL-9jE"/>
+                                    <outlet property="profilePic" destination="0R7-1B-pwJ" id="Wdj-uG-EzU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

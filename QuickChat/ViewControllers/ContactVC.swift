@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import Firebase
 
 class ContactVC: UITableViewController {
+    
+    var items = [User]()
 
+    //Downloads users list for Contacts View
+    func fetchUsers()  {
+        if let id = FIRAuth.auth()?.currentUser?.uid {
+            User.downloadAllUsers(exceptID: id, completion: {(user) in
+                DispatchQueue.main.async {
+                    self.items.append(user)
+                    self.tableView.reloadData()
+                }
+            })
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.fetchUsers()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,23 +45,24 @@ class ContactVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.items.count
     }
 
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsCell", for: indexPath) as! ContactsCell
 
-        // Configure the cell...
-
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ContactsCVCell
+        cell.profilePic.image = self.items[indexPath.row].profilePic
+        cell.nameLabel.text = self.items[indexPath.row].name
+        cell.profilePic.layer.borderWidth = 2
+        cell.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

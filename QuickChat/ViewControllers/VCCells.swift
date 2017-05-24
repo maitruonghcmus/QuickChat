@@ -89,6 +89,16 @@ class ConversationsTBCell: UITableViewCell {
     
 }
 
+class ContactsCVCell: UICollectionViewCell {
+    
+    @IBOutlet weak var profilePic: RoundedImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
 class ConversCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: RoundedImageView!
@@ -111,7 +121,7 @@ class ConversCell: UITableViewCell {
     }
 }
 
-class ContactsCVCell: UICollectionViewCell {
+class ContactsCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: RoundedImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -120,7 +130,3 @@ class ContactsCVCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 }
-
-
-
-

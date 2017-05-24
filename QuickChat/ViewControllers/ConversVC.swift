@@ -65,11 +65,7 @@ class ConversVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.items.count == 0 {
-            return 1
-        } else {
-            return self.items.count
-        }
+        return self.items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,7 +125,6 @@ class ConversVC: UITableViewController {
             self.performSegue(withIdentifier: "NewSegue", sender: self)
         }
     }
-
 
     /*
      // MARK: - Navigation
