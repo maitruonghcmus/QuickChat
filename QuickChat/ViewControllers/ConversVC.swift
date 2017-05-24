@@ -49,13 +49,6 @@ class ConversVC: UITableViewController {
         AudioServicesPlaySystemSound(soundID)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segue" {
-            let vc = segue.destination as! ChatVC
-            vc.currentUser = self.selectedUser
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchData()
@@ -123,13 +116,21 @@ class ConversVC: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.items.count > 0 {
-            self.selectedUser = self.items[indexPath.row].user
-            self.performSegue(withIdentifier: "segue", sender: self)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewSegue" {
+            let vc = segue.destination as! ChatVC
+            vc.currentUser = self.selectedUser
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.items.count > 0 {
+            self.selectedUser = self.items[indexPath.row].user
+            self.performSegue(withIdentifier: "NewSegue", sender: self)
+        }
+    }
+
+
     /*
      // MARK: - Navigation
      

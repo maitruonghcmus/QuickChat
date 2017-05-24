@@ -50,7 +50,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     var currentUser: User?
     var canSendLocation = true
     
-    
     //MARK: Methods
     func customization() {
         self.imagePicker.delegate = self
@@ -59,26 +58,29 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationItem.title = self.currentUser?.name
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
-        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
-        self.navigationItem.leftBarButtonItem = backButton
+        
+        //self.navigationItem.setHidesBackButton(true, animated: false)
+//        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
+//        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
+//        self.navigationItem.leftBarButtonItem = backButton
         self.locationManager.delegate = self
     }
     
     //Downloads messages
     func fetchData() {
-        Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {[weak weakSelf = self] (message) in
-            weakSelf?.items.append(message)
-            weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
-            DispatchQueue.main.async {
-                if let state = weakSelf?.items.isEmpty, state == false {
-                    weakSelf?.tableView.reloadData()
-                    weakSelf?.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
+        if self.currentUser != nil{
+            Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {[weak weakSelf = self] (message) in
+                weakSelf?.items.append(message)
+                weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
+                DispatchQueue.main.async {
+                    if let state = weakSelf?.items.isEmpty, state == false {
+                        weakSelf?.tableView.reloadData()
+                        weakSelf?.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
+                    }
                 }
-            }
-        })
-        Message.markMessagesRead(forUserID: self.currentUser!.id)
+            })
+            Message.markMessagesRead(forUserID: self.currentUser!.id)
+        }
     }
     
     //Hides current viewcontroller
