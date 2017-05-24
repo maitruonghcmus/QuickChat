@@ -10,21 +10,22 @@ import UIKit
 
 class LoginVC: UIViewController {
     
-    // MARK: - Variables
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var lblMessage: UILabel!
-    
-    // MARK: - Custom func
     
     func pushTomainView() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false, completion: nil)
     }
-
-    // MARK: - Event
  
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {

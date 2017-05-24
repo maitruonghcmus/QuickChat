@@ -2,6 +2,31 @@ import UIKit
 
 class LandingVC: UIViewController {
     
+    //MARK: *** Variable
+    
+    //MARK: *** UI Elements
+    
+    //MARK: *** Custom Function
+    
+    //Push to ViewController
+    func pushTo(viewController: ViewControllerType)  {
+        switch viewController {
+        case .tabbar:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
+            self.present(vc, animated: false, completion: nil)
+        case .login:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.present(vc, animated: false, completion: nil)
+        default:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.present(vc, animated: false, completion: nil)
+        }
+    }
+    
+    //MARK: *** UI Events
+    
+    //MARK: *** View
+    
     //Set app alway display as portrait (dont rotate)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {
@@ -14,7 +39,7 @@ class LandingVC: UIViewController {
         super.viewDidAppear(animated)
         
         if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
-        
+            
             let email = userInformation["email"] as! String
             let password = userInformation["password"] as! String
             User.loginUser(withEmail: email, password: password, completion: { [weak weakSelf = self] (status) in
@@ -33,22 +58,9 @@ class LandingVC: UIViewController {
         }
     }
     
-    //Push to ViewController
-    func pushTo(viewController: ViewControllerType)  {
-        switch viewController {
-        case .tabbar:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
-            self.present(vc, animated: false, completion: nil)
-        case .login:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-            self.present(vc, animated: false, completion: nil)
-        default:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-            self.present(vc, animated: false, completion: nil)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    //MARK: *** Table View
 }

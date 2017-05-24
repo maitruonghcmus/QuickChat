@@ -1,26 +1,3 @@
-//  MIT License
-
-//  Copyright (c) 2017 Haik Aslanyan
-
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
-
-
 import UIKit
 import Photos
 import Firebase
@@ -28,21 +5,7 @@ import CoreLocation
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
     
-    //MARK: Properties
-    @IBOutlet var inputBar: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var inputTextField: UITextField!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    override var inputAccessoryView: UIView? {
-        get {
-            self.inputBar.frame.size.height = self.barHeight
-            self.inputBar.clipsToBounds = true
-            return self.inputBar
-        }
-    }
-    override var canBecomeFirstResponder: Bool{
-        return true
-    }
+    //MARK: *** Variable
     let locationManager = CLLocationManager()
     var items = [Message]()
     let imagePicker = UIImagePickerController()
@@ -50,7 +13,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     var currentUser: User?
     var canSendLocation = true
     
-    //MARK: Methods
+    //MARK: *** UI Elements
+    @IBOutlet var inputBar: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    //MARK: *** Custom Function
     func customization() {
         self.imagePicker.delegate = self
         self.tableView.estimatedRowHeight = self.barHeight
@@ -59,10 +28,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationItem.title = self.currentUser?.name
         
-        //self.navigationItem.setHidesBackButton(true, animated: false)
-//        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
-//        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
-//        self.navigationItem.leftBarButtonItem = backButton
+        //        self.navigationItem.setHidesBackButton(true, animated: false)
+        //        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
+        //        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
+        //        self.navigationItem.leftBarButtonItem = backButton
         self.locationManager.delegate = self
     }
     
@@ -123,6 +92,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
+    //NotificationCenter handlers
+    func showKeyboard(notification: Notification) {
+        if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let height = frame.cgRectValue.height
+            self.tableView.contentInset.bottom = height
+            self.tableView.scrollIndicatorInsets.bottom = height
+            if self.items.count > 0 {
+                self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+            }
+        }
+    }
+    
+    //MARK: *** UI Events
     @IBAction func showMessage(_ sender: Any) {
         self.animateExtraButtons(toHide: true)
     }
@@ -170,19 +152,41 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    //MARK: NotificationCenter handlers
-    func showKeyboard(notification: Notification) {
-        if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let height = frame.cgRectValue.height
-            self.tableView.contentInset.bottom = height
-            self.tableView.scrollIndicatorInsets.bottom = height
-            if self.items.count > 0 {
-                self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
-            }
+    //MARK: *** View
+    
+    //MARK: ViewController lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.inputBar.backgroundColor = UIColor.clear
+        self.view.layoutIfNeeded()
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+        Message.markMessagesRead(forUserID: self.currentUser!.id)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.customization()
+        self.fetchData()
+    }
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            self.inputBar.frame.size.height = self.barHeight
+            self.inputBar.clipsToBounds = true
+            return self.inputBar
         }
     }
     
-    //MARK: Delegates
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    
+    //MARK: *** Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
     }
@@ -299,25 +303,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    //MARK: ViewController lifecycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.inputBar.backgroundColor = UIColor.clear
-        self.view.layoutIfNeeded()
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-        Message.markMessagesRead(forUserID: self.currentUser!.id)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.customization()
-        self.fetchData()
-    }
+
 }
 
 

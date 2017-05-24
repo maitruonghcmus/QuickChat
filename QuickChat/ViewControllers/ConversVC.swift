@@ -12,10 +12,18 @@ import AudioToolbox
 
 class ConversVC: UITableViewController {
     
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
+    
+    
     var items = [Conversation]()
     var selectedUser: User?
     
-    //Downloads conversations
+    //Download all conversation
     func fetchData() {
         Conversation.showConversations { (conversations) in
             self.items = conversations
@@ -40,6 +48,7 @@ class ConversVC: UITableViewController {
         }
     }
     
+    //Play sound when give a new message
     func playSound()  {
         var soundURL: NSURL?
         var soundID:SystemSoundID = 0
@@ -58,7 +67,19 @@ class ConversVC: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - Table view data source
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewSegue" {
+            let vc = segue.destination as! ChatVC
+            vc.currentUser = self.selectedUser
+        }
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -105,35 +126,10 @@ class ConversVC: UITableViewController {
         return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
-            self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "NewSegue" {
-            let vc = segue.destination as! ChatVC
-            vc.currentUser = self.selectedUser
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.items.count > 0 {
             self.selectedUser = self.items[indexPath.row].user
             self.performSegue(withIdentifier: "NewSegue", sender: self)
         }
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

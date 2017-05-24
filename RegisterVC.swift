@@ -11,7 +11,12 @@ import Photos
 
 class RegisterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    //MARK - Variables
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
     
     @IBOutlet weak var imgProfile: RoundedImageView!
     @IBOutlet weak var txtName: UITextField!
@@ -21,7 +26,6 @@ class RegisterVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
     let imagePicker = UIImagePickerController()
     
-    //MARK - Custom function
     func pushTomainView() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
         self.show(vc, sender: nil)
@@ -52,8 +56,6 @@ class RegisterVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         }
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    //MARK - Events
     
     @IBAction func btnBackToSignIn_Tapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -97,7 +99,6 @@ class RegisterVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             }
         }
     }
-    
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {

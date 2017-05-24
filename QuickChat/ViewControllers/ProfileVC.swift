@@ -11,6 +11,13 @@ import Firebase
 
 class ProfileVC: UIViewController {
 
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
+    
     @IBOutlet weak var imgProfile: RoundedImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!

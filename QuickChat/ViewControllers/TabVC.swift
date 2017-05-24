@@ -10,6 +10,13 @@ import UIKit
 
 class TabVC: UITabBarController {
     
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {
             return UIInterfaceOrientationMask.portrait
@@ -27,15 +34,4 @@ class TabVC: UITabBarController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

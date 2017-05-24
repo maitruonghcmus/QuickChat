@@ -11,6 +11,14 @@ import Firebase
 
 class ContactVC: UITableViewController {
     
+    //MARK: *** Variable
+    //MARK: *** UI Elements
+    //MARK: *** Custom Functions
+    //MARK: *** UI Events
+    //MARK: *** View
+    //MARK: *** Table View
+    
+    
     var items = [User]()
     var selectedUser: User?
     
@@ -34,8 +42,6 @@ class ContactVC: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
