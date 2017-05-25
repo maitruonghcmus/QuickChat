@@ -28,10 +28,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationItem.title = self.currentUser?.name
         
-        //        self.navigationItem.setHidesBackButton(true, animated: false)
-        //        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
-        //        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
-        //        self.navigationItem.leftBarButtonItem = backButton
+//        self.navigationItem.setHidesBackButton(true, animated: false)
+//        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
+//        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
+//        self.navigationItem.leftBarButtonItem = backButton
+        
         self.locationManager.delegate = self
     }
     

@@ -26,8 +26,8 @@ import UIKit
 
 //Global variables
 struct GlobalVariables {
-    static let blue = UIColor.rbg(r: 129, g: 144, b: 255)
-    static let purple = UIColor.rbg(r: 161, g: 114, b: 255)
+    static let blue = UIColor.rbg(r: 0, g: 123, b: 255)
+    static let purple = UIColor.rbg(r: 0, g: 123, b: 255)
 }
 
 //Extensions
