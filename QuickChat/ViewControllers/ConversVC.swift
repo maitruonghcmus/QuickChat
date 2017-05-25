@@ -10,24 +10,25 @@ import UIKit
 import Firebase
 import AudioToolbox
 
-class ConversVC: UITableViewController {
+class ConversVC: UITableViewController, UISearchBarDelegate {
     
     //MARK: *** Variable
-    //MARK: *** UI Elements
-    //MARK: *** Custom Functions
-    //MARK: *** UI Events
-    //MARK: *** View
-    //MARK: *** Table View
-    
-    
     var items = [Conversation]()
     var selectedUser: User?
+    var filtered:[Conversation] = []
+    var searchActive : Bool = false
     
+    //MARK: *** UI Elements
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    //MARK: *** Custom Functions
     //Download all conversation
     func fetchData() {
         Conversation.showConversations { (conversations) in
             self.items = conversations
             self.items.sort{ $0.lastMessage.timestamp > $1.lastMessage.timestamp }
+            self.filtered = self.items
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 for conversation in self.items {
@@ -58,9 +59,30 @@ class ConversVC: UITableViewController {
         AudioServicesPlaySystemSound(soundID)
     }
     
+    
+    func showEditing() {
+        if(self.tableView.isEditing == true)
+        {
+            self.tableView.isEditing = false
+            self.navigationItem.rightBarButtonItem?.title = "Done"
+        }
+        else
+        {
+            self.tableView.isEditing = true
+            self.navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+    }
+    
+    //MARK: *** UI Events
+    
+    
+    //MARK: *** View
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchData()
+        searchBar.delegate = self
+        //        let leftBarButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: Selector(("showEditing:")))
+        //        self.navigationItem.leftBarButtonItem = leftBarButton
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,26 +103,31 @@ class ConversVC: UITableViewController {
         }
     }
     
+    //MARK: *** Table View
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+            return self.filtered.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConversCell", for: indexPath) as! ConversCell
         
-        if self.items.count > 0 {
-            cell.clearCellData()
-            cell.profilePic.image = self.items[indexPath.row].user.profilePic
-            cell.nameLabel.text = self.items[indexPath.row].user.name
+        if self.filtered.count > 0{
             
-            switch self.items[indexPath.row].lastMessage.type {
+            let currentItem = filtered[indexPath.row]
+            
+            cell.clearCellData()
+            cell.profilePic.image = currentItem.user.profilePic
+            cell.nameLabel.text = currentItem.user.name
+            
+            switch currentItem.lastMessage.type {
             case .text:
-                let message = self.items[indexPath.row].lastMessage.content as! String
+                let message = currentItem.lastMessage.content as! String
                 cell.messageLabel.text = message
             case .location:
                 cell.messageLabel.text = "Location"
@@ -108,13 +135,13 @@ class ConversVC: UITableViewController {
                 cell.messageLabel.text = "Media"
             }
             
-            let messageDate = Date.init(timeIntervalSince1970: TimeInterval(self.items[indexPath.row].lastMessage.timestamp))
+            let messageDate = Date.init(timeIntervalSince1970: TimeInterval(currentItem.lastMessage.timestamp))
             let dataformatter = DateFormatter.init()
             dataformatter.timeStyle = .short
             let date = dataformatter.string(from: messageDate)
             cell.timeLabel.text = date
             
-            if self.items[indexPath.row].lastMessage.owner == .sender && self.items[indexPath.row].lastMessage.isRead == false {
+            if currentItem.lastMessage.owner == .sender && currentItem.lastMessage.isRead == false {
                 cell.nameLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 17.0)
                 cell.messageLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 14.0)
                 cell.timeLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 13.0)
@@ -122,14 +149,63 @@ class ConversVC: UITableViewController {
                 cell.messageLabel.textColor = GlobalVariables.blue
             }
         }
-
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.items.count > 0 {
-            self.selectedUser = self.items[indexPath.row].user
+        if self.filtered.count > 0 {
+            self.selectedUser = self.filtered[indexPath.row].user
             self.performSegue(withIdentifier: "NewSegue", sender: self)
         }
+    }
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    //MARK: *** Search Bar
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText != "" {
+            filtered = items.filter {
+                $0.user.name.lowercased().contains(searchText.lowercased())
+            }
+            searchActive = true
+        }
+        else {
+            filtered = items
+            searchActive = false
+        }
+        
+        self.tableView.reloadData()
     }
 }
