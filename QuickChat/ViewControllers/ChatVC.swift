@@ -257,24 +257,24 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.inputTextField.resignFirstResponder()
-        switch self.items[indexPath.row].type {
-        case .photo:
-            if let photo = self.items[indexPath.row].image {
-                let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
-                self.inputAccessoryView?.isHidden = true
-            }
-        case .location:
-            let coordinates = (self.items[indexPath.row].content as! String).components(separatedBy: ":")
-            let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
-            let info = ["viewType" : ShowExtraView.map, "location": location] as [String : Any]
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
-            self.inputAccessoryView?.isHidden = true
-        default: break
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.inputTextField.resignFirstResponder()
+//        switch self.items[indexPath.row].type {
+//        case .photo:
+//            if let photo = self.items[indexPath.row].image {
+//                let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+//                self.inputAccessoryView?.isHidden = true
+//            }
+//        case .location:
+//            let coordinates = (self.items[indexPath.row].content as! String).components(separatedBy: ":")
+//            let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
+//            let info = ["viewType" : ShowExtraView.map, "location": location] as [String : Any]
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+//            self.inputAccessoryView?.isHidden = true
+//        default: break
+//        }
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -303,8 +303,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             }
         }
     }
-    
-
 }
 
 
