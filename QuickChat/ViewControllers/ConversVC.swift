@@ -9,14 +9,19 @@
 import UIKit
 import Firebase
 import AudioToolbox
+import UserNotifications
 
-class ConversVC: UITableViewController, UISearchBarDelegate {
+class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationCenterDelegate {
     
     //MARK: *** Variable
     var items = [Conversation]()
     var selectedUser: User?
     var filtered:[Conversation] = []
     var searchActive : Bool = false
+    // permission push notification
+    var allowPush : Bool = false
+    let requestIdentifier = "PushRequest"
+    let requestImageIdentifier = "PushImageRequest"
     
     //MARK: *** UI Elements
     @IBOutlet weak var btnEdit: UIBarButtonItem!
@@ -34,7 +39,9 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
                 for conversation in self.items {
                     if conversation.lastMessage.isRead == false {
                         self.playSound()
-                        break
+                        if self.allowPush == true {
+                            self.pushNotification(conv: conversation)
+                        }
                     }
                 }
             }
@@ -73,6 +80,51 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    //MARK: *** push notification
+    func pushNotification(conv: Conversation) {
+        let content = UNMutableNotificationContent()
+        content.title = "New message"
+        content.subtitle = "From \(conv.user.name)"
+        switch conv.lastMessage.type {
+        case .text:
+            let message = conv.lastMessage.content as! String
+            content.body = message
+        case .location:
+            content.body = "Location"
+        default:
+            content.body = "Add new image"
+            //To Present image in notification
+                let url = URL.init(string: conv.lastMessage.content as! String)
+                
+                do {
+                    let attachment = try UNNotificationAttachment(identifier: requestImageIdentifier, url: url!, options: nil)
+                    content.attachments = [attachment]
+                } catch {
+                    print("attachment not found.")
+                }
+        }
+        content.badge = 1
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("Tapped in notification")
+    }
+    
+    //This is key callback to present notification while the app is in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print("Notification being triggered")
+        //You can either present alert ,sound or increase badge while the app is in foreground too with ios 10
+        //to distinguish between notifications
+        if notification.request.identifier == requestIdentifier{
+            completionHandler( [.alert,.sound,.badge])
+        }
+    }
+    
     //MARK: *** UI Events
     
     
@@ -83,6 +135,13 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
         //        let leftBarButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: Selector(("showEditing:")))
         //        self.navigationItem.leftBarButtonItem = leftBarButton
+        // add permission push notification
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {
+            didAllow,error in
+            self.allowPush = didAllow
+        })
+        UNUserNotificationCenter.current().delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,6 +150,8 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if allowPush == true {
+        }
         if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
         }
