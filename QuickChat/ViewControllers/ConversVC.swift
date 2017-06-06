@@ -41,7 +41,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
                         self.playSound()
                         
                     }
-                    if self.allowPush == true && conversation.lastMessage.isRead == false && conversation.user.id == FIRAuth.auth()?.currentUser?.uid {
+                    if self.allowPush == true && conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
                         self.pushNotification(conv: conversation)
                     }
                 }
