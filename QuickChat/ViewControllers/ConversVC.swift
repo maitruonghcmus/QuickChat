@@ -83,6 +83,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
     
     //MARK: *** push notification
     func pushNotification(conv: Conversation) {
+        self.selectedUser = conv.user
         let content = UNMutableNotificationContent()
         content.title = "New message"
         content.subtitle = "From \(conv.user.name)"
@@ -111,7 +112,8 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        self.performSegue(withIdentifier: "NewSegue", sender: self)
         print("Tapped in notification")
     }
     

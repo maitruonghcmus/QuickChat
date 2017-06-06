@@ -30,6 +30,12 @@
 	<string>Location will be used for to share with friends</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos will be used for setting profile picture or sending to friends</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
