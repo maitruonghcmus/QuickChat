@@ -12,6 +12,7 @@
 		117DDDE31ED53AC900067713 /* ContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE21ED53AC900067713 /* ContactVC.swift */; };
 		117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE41ED53B0B00067713 /* ProfileVC.swift */; };
 		117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE61ED53CFE00067713 /* TabVC.swift */; };
+		11EE29361EE7A5D800E228E8 /* TouchIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */; };
 		11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */; };
 		11FAB6BD1ED422AB00299AD0 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */; };
 		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
@@ -38,6 +39,7 @@
 		117DDDE21ED53AC900067713 /* ContactVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactVC.swift; path = QuickChat/ViewControllers/ContactVC.swift; sourceTree = "<group>"; };
 		117DDDE41ED53B0B00067713 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = QuickChat/ViewControllers/ProfileVC.swift; sourceTree = "<group>"; };
 		117DDDE61ED53CFE00067713 /* TabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabVC.swift; path = QuickChat/ViewControllers/TabVC.swift; sourceTree = "<group>"; };
+		11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDVC.swift; path = QuickChat/ViewControllers/TouchIDVC.swift; sourceTree = "<group>"; };
 		11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				117DDDE21ED53AC900067713 /* ContactVC.swift */,
 				117DDDE41ED53B0B00067713 /* ProfileVC.swift */,
 				117DDDE61ED53CFE00067713 /* TabVC.swift */,
+				11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -330,6 +333,7 @@
 				117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */,
 				117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */,
 				22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */,
+				11EE29361EE7A5D800E228E8 /* TouchIDVC.swift in Sources */,
 				117DDDE11ED53A6500067713 /* ConversVC.swift in Sources */,
 				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
