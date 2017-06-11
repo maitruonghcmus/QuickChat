@@ -22,17 +22,28 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
-    
+    var deviceTokenString = Data()
+    let requestIdentifier = "PushRequest"
+    let USERID = "userid"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
         //UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
         //UINavigationBar.appearance().isTranslucent = false
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: {(granted, error) in
+            if (granted) {
+                UIApplication.shared.registerForRemoteNotifications()
+            } else{
+                print("Notification permissions not granted")
+            }
+        })
         return true
     }
     
@@ -57,8 +68,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    //Completed registering for notifications. Store the device token to be saved later
+    func application( _ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data ) {
+        
+        self.deviceTokenString = deviceToken
+    }
+    
+    //Called when a notification is delivered to a foreground app.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        //Handle the notification
+        if notification.request.identifier == requestIdentifier{
+            completionHandler( [.alert,.sound,.badge])
+        }
+    }
+    
+    //Called when a notification is delivered to a background app.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //Handle the notification
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        let userid = response.notification.request.content.userInfo[USERID] as! String
+        User.info(forUserID: userid) {
+            [weak weakSelf = self] (user) in DispatchQueue.main.async {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabVC") as! TabVC
+                let vcChat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Chat") as! ChatVC
+                vcChat.currentUser = user
+                weakSelf?.window = UIWindow(frame: UIScreen.main.bounds)
+                let navigationController = UINavigationController(rootViewController: vc)
+                navigationController.navigationBar.isTranslucent = false
+                self.window?.rootViewController = navigationController
+                navigationController.pushViewController(vcChat, animated: false)
+//                weakSelf?.window!.rootViewController = vc
+                weakSelf?.window!.makeKeyAndVisible()
+                weakSelf = nil
+            }
+        }
+        completionHandler()
+    }
 }
-
-
-
-

@@ -11,7 +11,7 @@ import Firebase
 import AudioToolbox
 import UserNotifications
 
-class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationCenterDelegate {
+class ConversVC: UITableViewController, UISearchBarDelegate {
     
     //MARK: *** Variable
     var items = [Conversation]()
@@ -21,6 +21,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
     // permission push notification
     var allowPush : Bool = false
     let requestIdentifier = "PushRequest"
+    let USERID = "userid"
     let requestImageIdentifier = "PushImageRequest"
     
     //MARK: *** UI Elements
@@ -41,8 +42,14 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
                         self.playSound()
                         
                     }
-                    if self.allowPush == true && conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
-                        self.pushNotification(conv: conversation)
+                    let state = UIApplication.shared.applicationState
+                    
+                    if state == .background {
+                        if conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
+                            self.pushNotification(conv: conversation)
+                        }
+                    }
+                    else if state == .active {
                     }
                 }
             }
@@ -83,7 +90,6 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
     
     //MARK: *** push notification
     func pushNotification(conv: Conversation) {
-        self.selectedUser = conv.user
         let content = UNMutableNotificationContent()
         content.title = "New message"
         content.subtitle = "From \(conv.user.name)"
@@ -106,26 +112,10 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
                 }
         }
         content.badge = 1
+        content.userInfo = [USERID:conv.user.id]
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        self.performSegue(withIdentifier: "NewSegue", sender: self)
-        print("Tapped in notification")
-    }
-    
-    //This is key callback to present notification while the app is in foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        print("Notification being triggered")
-        //You can either present alert ,sound or increase badge while the app is in foreground too with ios 10
-        //to distinguish between notifications
-        if notification.request.identifier == requestIdentifier{
-            completionHandler( [.alert,.sound,.badge])
-        }
     }
     
     //MARK: *** UI Events
@@ -139,11 +129,6 @@ class ConversVC: UITableViewController, UISearchBarDelegate, UNUserNotificationC
         //        let leftBarButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: Selector(("showEditing:")))
         //        self.navigationItem.leftBarButtonItem = leftBarButton
         // add permission push notification
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {
-            didAllow,error in
-            self.allowPush = didAllow
-        })
-        UNUserNotificationCenter.current().delegate = self
         
     }
     

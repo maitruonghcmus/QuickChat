@@ -35,8 +35,26 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
+            let email = userInformation["email"] as! String
+            let password = userInformation["password"] as! String
+            User.loginUser(withEmail: email, password: password) {
+                [weak weakSelf = self](status) in DispatchQueue.main.async {
+                    if status == true {
+                        weakSelf?.pushTomainView()
+                    } else {
+                        self.lblMessage.isHidden = false
+                    }
+                    weakSelf = nil
+                }
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -44,7 +62,6 @@ class LoginVC: UIViewController {
     @IBAction func btnSignIn_Tapped(_ sender: Any) {
         User.loginUser(withEmail: self.txtEmail.text!, password: self.txtPassword.text!) {
             [weak weakSelf = self](status) in DispatchQueue.main.async {
-                
                 if status == true {
                     weakSelf?.pushTomainView()
                 } else {
