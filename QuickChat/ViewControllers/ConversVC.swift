@@ -205,6 +205,10 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.filtered.count > 0 {
             self.selectedUser = self.filtered[indexPath.row].user
+            let currentItem = filtered[indexPath.row]
+            if currentItem.lastMessage.isRead == false {
+                UIApplication.shared.applicationIconBadgeNumber -= 1
+            }
             self.performSegue(withIdentifier: "NewSegue", sender: self)
         }
     }

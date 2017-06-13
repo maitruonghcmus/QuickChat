@@ -18,6 +18,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    let USERID = "userid"
     
     //MARK: *** Custom Function
     func customization() {
@@ -49,6 +50,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                     }
                 }
             })
+            
             Message.markMessagesRead(forUserID: self.currentUser!.id)
         }
     }

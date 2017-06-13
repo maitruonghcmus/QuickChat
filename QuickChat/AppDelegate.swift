@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //Called when a notification is delivered to a background app.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         //Handle the notification
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber -= 1
         let userid = response.notification.request.content.userInfo[USERID] as! String
         User.info(forUserID: userid) {
             [weak weakSelf = self] (user) in DispatchQueue.main.async {
