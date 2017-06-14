@@ -32,7 +32,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     //Download all conversation
     func fetchData() {
         Conversation.showConversations { (conversations) in
-            self.items = conversations
+            self.items = conversations.filter{$0.locked == false}
             self.items.sort{ $0.lastMessage.timestamp > $1.lastMessage.timestamp }
             self.filtered = self.items
             DispatchQueue.main.async {
@@ -206,6 +206,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
         if self.filtered.count > 0 {
             self.selectedUser = self.filtered[indexPath.row].user
             let currentItem = filtered[indexPath.row]
+            
             if currentItem.lastMessage.isRead == false {
                 UIApplication.shared.applicationIconBadgeNumber -= 1
             }

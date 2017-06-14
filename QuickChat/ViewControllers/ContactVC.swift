@@ -86,7 +86,21 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.filtered.count > 0 {
             self.selectedUser = filtered[indexPath.row]
-            self.performSegue(withIdentifier: "ContactToChatSegueID", sender: self)
+            Conversation.checkLocked(uid: (self.selectedUser?.id)!, completion: {(locked) in
+                if locked == true {
+                    self.showAlert(completion: { (ok) in
+                        if ok == true {
+                            self.performSegue(withIdentifier: "ContactToChatSegueID", sender: self)
+                        }
+                        else {
+                            self.showAlertFail()
+                        }
+                    })
+                }else {
+                    
+                    self.performSegue(withIdentifier: "ContactToChatSegueID", sender: self)
+                }
+            })
         }
     }
     
@@ -122,5 +136,50 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
         }
         
         self.tableView.reloadData()
+    }
+    
+    //MARK: show lock alert
+    func showAlert(completion: @escaping (Bool) -> Swift.Void){
+        let alertController = UIAlertController(title: "Passcode", message: "Please input passcode:", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+            if let field = alertController.textFields![0] as? UITextField {
+                Other.get(completion: { (other) in
+                    DispatchQueue.main.async {
+                        if field.text == other.passcode {
+                            completion(true)
+                        }
+                        else {
+                            completion(false)
+                        }
+                    }
+                })
+                
+            } else {
+                completion(false)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Passcode:"
+            textField.isSecureTextEntry = true
+            textField.keyboardType = .numberPad
+        }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertFail() {
+        let alertVC = UIAlertController(title: "Passcode", message: "Wrong passcode", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertVC.addAction(okAction)
+        DispatchQueue.main.async() { () -> Void in
+            self.present(alertVC, animated: true, completion: nil)
+        }
     }
 }

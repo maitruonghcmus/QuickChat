@@ -29,6 +29,7 @@ class Conversation {
     //MARK: Properties
     let user: User
     var lastMessage: Message
+    var locked : Bool
     
     //MARK: Methods
     class func showConversations(completion: @escaping ([Conversation]) -> Swift.Void) {
@@ -39,9 +40,10 @@ class Conversation {
                     let fromID = snapshot.key
                     let values = snapshot.value as! [String: String]
                     let location = values["location"]!
+                    let locked = values["locked"] != nil && values["locked"] == "1" ? true : false
                     User.info(forUserID: fromID, completion: { (user) in
                         let emptyMessage = Message.init(type: .text, content: "loading", owner: .sender, timestamp: 0, isRead: true)
-                        let conversation = Conversation.init(user: user, lastMessage: emptyMessage)
+                        let conversation = Conversation.init(user: user, lastMessage: emptyMessage, locked: locked)
                         conversations.append(conversation)
                         conversation.lastMessage.downloadLastMessage(forLocation: location, completion: { (_) in
                             completion(conversations)
@@ -53,8 +55,28 @@ class Conversation {
     }
     
     //MARK: Inits
-    init(user: User, lastMessage: Message) {
+    init(user: User, lastMessage: Message, locked: Bool) {
         self.user = user
         self.lastMessage = lastMessage
+        self.locked = locked
+    }
+    
+    
+    
+    class func checkLocked(uid: String, completion: @escaping (Bool) -> Swift.Void) {
+        if FIRAuth.auth()?.currentUser?.uid != nil {
+            FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("conversations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let data = snapshot.value as? [String: String] {
+                    let locked = data["locked"] != nil && data["locked"] == "1" ? true : false
+                    completion(locked)
+                }
+                else {
+                    completion(false)
+                }
+            })
+        }
+        else {
+            completion(false)
+        }
     }
 }
