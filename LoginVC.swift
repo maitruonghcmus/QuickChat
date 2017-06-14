@@ -49,7 +49,9 @@ class LoginVC: UIViewController {
         User.loginUser(withEmail: self.txtEmail.text!, password: self.txtPassword.text!) {
             [weak weakSelf = self](status) in DispatchQueue.main.async {
                 if status == true {
-                    weakSelf?.pushTomainView()
+                    Other.get(completion: {(ok) in
+                        self.pushTomainView()
+                    })
                 } else {
                     self.lblMessage.isHidden = false
                 }

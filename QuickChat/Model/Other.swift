@@ -13,39 +13,28 @@ import Firebase
 class Other: NSObject {
     
     //MARK: Variable
-    let usePasscode: Bool
-    let passcode: String
+    static var useTouchID : Bool = false
+    static var useNotification : Bool = false
+    static var passcode: String = ""
     
-    //MARK: init
-    init(usePasscode:Bool,passcode: String) {
-        self.usePasscode = usePasscode
-        self.passcode = passcode
-    }
-    
-    //MARK: Methods
-    class func get(completion: @escaping (Other) -> Swift.Void) {
+    class func get(completion: @escaping (Bool) -> Swift.Void) {
         if FIRAuth.auth()?.currentUser?.uid != nil {
             FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("others").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let data = snapshot.value as? [String: String] {
-                    let usePasscode = data["usePasscode"] as? Bool
-                    let passcode = data["passcode"]!
-                    let other = Other.init(usePasscode: usePasscode!, passcode: passcode)
-                    completion(other)
-                }
-                else {
-                    completion(Other(usePasscode: false, passcode: ""))
+                    Other.useTouchID = data["usetouchid"] != nil && data["usetouchid"] != "0" ? true : false
+                    Other.useNotification = data["usenotification"] != nil && data["usenotification"] != "0" ? true : false
+                    Other.passcode = data["passcode"] != nil ? data["passcode"]! : ""
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             })
         }
-        else {
-            completion(Other(usePasscode: false, passcode: ""))
-        }
-        
     }
     
-    class func update(other: Other, completion: @escaping (Bool) -> Swift.Void) {
+    class func update(completion: @escaping (Bool) -> Swift.Void) {
         if FIRAuth.auth()?.currentUser?.uid != nil {
-            let values = ["usePasscode": other.usePasscode ? "1" : "0", "passcode": other.passcode]
+            let values = ["usetouchid": Other.useTouchID ? "1" : "0", "passcode": Other.passcode,"usenotification": Other.useNotification ? "1" : "0"]
             FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("others").updateChildValues(values, withCompletionBlock: { (errr, _) in
                 if errr == nil {
                     completion(true)

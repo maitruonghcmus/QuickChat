@@ -87,7 +87,7 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
         if self.filtered.count > 0 {
             self.selectedUser = filtered[indexPath.row]
             Conversation.checkLocked(uid: (self.selectedUser?.id)!, completion: {(locked) in
-                if locked == true {
+                if Other.useTouchID == true && locked == true {
                     self.showAlert(completion: { (ok) in
                         if ok == true {
                             self.performSegue(withIdentifier: "ContactToChatSegueID", sender: self)
@@ -96,8 +96,8 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
                             self.showAlertFail()
                         }
                     })
-                }else {
-                    
+                }
+                else {
                     self.performSegue(withIdentifier: "ContactToChatSegueID", sender: self)
                 }
             })
@@ -144,17 +144,12 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
-                Other.get(completion: { (other) in
-                    DispatchQueue.main.async {
-                        if field.text == other.passcode {
-                            completion(true)
-                        }
-                        else {
-                            completion(false)
-                        }
-                    }
-                })
-                
+                if field.text == Other.passcode {
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
             } else {
                 completion(false)
             }

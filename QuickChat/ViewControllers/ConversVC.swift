@@ -32,7 +32,11 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     //Download all conversation
     func fetchData() {
         Conversation.showConversations { (conversations) in
-            self.items = conversations.filter{$0.locked == false}
+            if Other.useTouchID == true{
+                self.items = conversations.filter{$0.locked == false}
+            } else {
+               self.items = conversations
+            }
             self.items.sort{ $0.lastMessage.timestamp > $1.lastMessage.timestamp }
             self.filtered = self.items
             DispatchQueue.main.async {
@@ -45,7 +49,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
                     let state = UIApplication.shared.applicationState
                     
                     if state == .background {
-                        if conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
+                        if Other.useNotification == true && conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
                             self.pushNotification(conv: conversation)
                         }
                     }
@@ -53,6 +57,9 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
                     }
                 }
             }
+        }
+        if Other.useNotification == false {
+            UIApplication.shared.applicationIconBadgeNumber = 0
         }
     }
     

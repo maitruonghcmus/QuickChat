@@ -31,6 +31,8 @@
 		22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22EA578E1E1D28DD0008FFB2 /* newMessage.wav */; };
 		22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA57901E1D32520008FFB2 /* VCCells.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
+		8F4AB2561EF1819C001DE437 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AB2551EF1819C001DE437 /* Other.swift */; };
+		8F4AB2581EF1A5AB001DE437 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AB2571EF1A5AB001DE437 /* SettingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		22EA578E1E1D28DD0008FFB2 /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
 		22EA57901E1D32520008FFB2 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCCells.swift; path = QuickChat/ViewControllers/VCCells.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
+		8F4AB2551EF1819C001DE437 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Other.swift; path = QuickChat/Model/Other.swift; sourceTree = "<group>"; };
+		8F4AB2571EF1A5AB001DE437 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = QuickChat/ViewControllers/SettingVC.swift; sourceTree = "<group>"; };
 		8F520BBC1EDB4922006AD9E2 /* QuickChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickChat.entitlements; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				224834B01DB539A50019153C /* User.swift */,
 				22873DA91DC790550021690E /* Message.swift */,
 				22B974BF1DE9B5DF00E09490 /* Conversation.swift */,
+				8F4AB2551EF1819C001DE437 /* Other.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -105,6 +110,7 @@
 				117DDDE41ED53B0B00067713 /* ProfileVC.swift */,
 				117DDDE61ED53CFE00067713 /* TabVC.swift */,
 				11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */,
+				8F4AB2571EF1A5AB001DE437 /* SettingVC.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -340,8 +346,10 @@
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
 				117DDDE31ED53AC900067713 /* ContactVC.swift in Sources */,
 				220698841E066E4900F2284B /* Helper Files.swift in Sources */,
+				8F4AB2561EF1819C001DE437 /* Other.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
 				22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */,
+				8F4AB2581EF1A5AB001DE437 /* SettingVC.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
 				11FAB6BD1ED422AB00299AD0 /* RegisterVC.swift in Sources */,
 			);
