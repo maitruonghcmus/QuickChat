@@ -20,6 +20,19 @@ class LoginVC: UIViewController {
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var lblLogin: UILabel!
+    @IBOutlet weak var lblErrMessage: UILabel!
+    @IBOutlet weak var btnSignIn: RoundedButton!
+    @IBOutlet weak var btnCreateAccount: UIButton!
+    
+    func setLanguague(){
+        lblLogin.text = MultiLanguague.Instance.loginStr
+        txtEmail.placeholder = MultiLanguague.Instance.emailStr
+        txtPassword.placeholder = MultiLanguague.Instance.passwordStr
+        lblMessage.text = MultiLanguague.Instance.errLoginStr
+        btnSignIn.setTitle(MultiLanguague.Instance.signInBtnStr, for: .normal)
+        btnCreateAccount.setTitle(MultiLanguague.Instance.createAccBtnStr, for: .normal)
+    }
     
     func pushTomainView() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
@@ -31,6 +44,10 @@ class LoginVC: UIViewController {
         get {
             return UIInterfaceOrientationMask.portrait
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setLanguague()
     }
     
     override func viewDidLoad() {

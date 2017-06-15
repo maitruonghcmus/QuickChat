@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112224B71EF26D60008143DE /* MultiLanguague.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112224B61EF26D60008143DE /* MultiLanguague.swift */; };
 		1150B2511ECC2A8C00D6DC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */; };
 		117DDDE11ED53A6500067713 /* ConversVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE01ED53A6500067713 /* ConversVC.swift */; };
 		117DDDE31ED53AC900067713 /* ContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE21ED53AC900067713 /* ContactVC.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		112224B61EF26D60008143DE /* MultiLanguague.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLanguague.swift; path = QuickChat/ViewControllers/MultiLanguague.swift; sourceTree = "<group>"; };
 		1150B2501ECC2A8C00D6DC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		117DDDE01ED53A6500067713 /* ConversVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversVC.swift; path = QuickChat/ViewControllers/ConversVC.swift; sourceTree = "<group>"; };
 		117DDDE21ED53AC900067713 /* ContactVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactVC.swift; path = QuickChat/ViewControllers/ContactVC.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		224834AF1DB539690019153C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				112224B61EF26D60008143DE /* MultiLanguague.swift */,
 				224834B01DB539A50019153C /* User.swift */,
 				22873DA91DC790550021690E /* Message.swift */,
 				22B974BF1DE9B5DF00E09490 /* Conversation.swift */,
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				112224B71EF26D60008143DE /* MultiLanguague.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
 				11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */,
