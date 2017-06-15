@@ -23,6 +23,19 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var btnLogout: RoundedButton!
     
+    func setLanguague(){
+        DispatchQueue.main.async {
+            self.navigationItem.title = MultiLanguague.profileItem
+            self.btnLogout.setTitle(MultiLanguague.profileBtnLogout, for: .normal)
+        }
+        
+        //self.setLanguague(lang: MultiLanguague.languague)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setLanguague()
+    }
+
     
     //Downloads current user credentials
     func fetchUserInfo() {

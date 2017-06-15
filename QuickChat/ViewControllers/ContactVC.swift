@@ -21,6 +21,18 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     
+    func setLanguague(){
+        DispatchQueue.main.async {
+            self.navigationItem.title = MultiLanguague.contactItem
+        }
+        
+        //self.setLanguague(lang: MultiLanguague.languague)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setLanguague()
+    }
+    
     //MARK: *** Custom Functions
     //Downloads users list for Contacts View
     func fetchUsers()  {

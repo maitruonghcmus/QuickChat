@@ -17,17 +17,23 @@ class TabVC: UITabBarController {
     //MARK: *** View
     //MARK: *** Table View
     
+    func setLanguague(){
+        DispatchQueue.main.async {
+            self.tabBar.items?[0].title = MultiLanguague.messageItem
+            self.tabBar.items?[1].title = MultiLanguague.contactItem
+            self.tabBar.items?[2].title = MultiLanguague.profileItem
+            self.tabBar.items?[3].title = MultiLanguague.settingTitle
+        }
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {
             return UIInterfaceOrientationMask.portrait
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        tabBar.items?[0].title = "Number 0"
-        tabBar.items?[1].title = "Number 1"
-        tabBar.items?[2].title = "Number 2"
-        tabBar.items?[3].title = "Number 3"
+    override func viewWillAppear(_ animated: Bool) {
+        self.setLanguague()
     }
     
     override func viewDidLoad() {

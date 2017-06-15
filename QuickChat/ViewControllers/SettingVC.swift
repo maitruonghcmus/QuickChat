@@ -31,8 +31,9 @@ class SettingVC: UIViewController {
             self.lblTouchIDPasscode?.text = MultiLanguague.settingTouchIDPasscode
             self.btnRestoreDefault.setTitle(MultiLanguague.settingRestoreDefaul, for: .normal)
             self.navigationItem.title = MultiLanguague.settingTitle
-            self.tabBarItem.title = "abbb"
         }
+        
+        //TabVC().setLanguague()
     }
 
     @IBAction func btnEn_Tapped(_ sender: Any) {
@@ -62,16 +63,16 @@ class SettingVC: UIViewController {
                 showInputPasscode(completion: {(ok) in
                     if ok == true {
                         Other.useTouchID = true
-                        self.showAlertFail(title: "Success", message: "Please restart app to use passcode")
+                        self.showAlertFail(title: MultiLanguague.success, message: MultiLanguague.pleaseRestart)
                     }
                     else {
                         Other.useTouchID = false
-                        self.showAlertFail(title: "Error", message: "Passcode not same")
+                        self.showAlertFail(title: MultiLanguague.error, message: MultiLanguague.passDoesNotMatch)
                     }
                     self.switchTouchID.setOn(Other.useTouchID, animated: true)
                     Other.update(completion: {(ok) in
                         if ok == false {
-                            self.showAlertFail(title: "Error", message: "Have error, please try again")
+                            self.showAlertFail(title: MultiLanguague.error, message: MultiLanguague.tryAgain)
                         }
                     })
                 })
@@ -79,16 +80,16 @@ class SettingVC: UIViewController {
                 showConfirmPasscode(completion: {(ok) in
                     if ok == true {
                         Other.useTouchID = false
-                        self.showAlertFail(title: "Success", message: "Please restart app to not use passcode")
+                        self.showAlertFail(title: MultiLanguague.success, message: MultiLanguague.pleaseRestart)
                     }
                     else {
                         Other.useTouchID = true
-                        self.showAlertFail(title: "Error", message: "Wrong passcode")
+                        self.showAlertFail(title: MultiLanguague.error, message: MultiLanguague.wrongPassword)
                     }
                     self.switchTouchID.setOn(Other.useTouchID, animated: true)
                     Other.update(completion: {(ok) in
                         if ok == false {
-                            self.showAlertFail(title: "Error", message: "Have error, please try again")
+                            self.showAlertFail(title: MultiLanguague.error, message: MultiLanguague.tryAgain)
                         }
                     })
                 })
@@ -98,7 +99,7 @@ class SettingVC: UIViewController {
             Other.useNotification = sender.isOn
             Other.update(completion: {(ok) in
                 if ok == false {
-                    self.showAlertFail(title: "Error", message: "Have error, please try again")
+                    self.showAlertFail(title: MultiLanguague.error, message: MultiLanguague.tryAgain)
                 }
             })
         }
@@ -111,9 +112,9 @@ class SettingVC: UIViewController {
     
     //MARK: show lock alert
     func showInputPasscode(completion: @escaping (Bool) -> Swift.Void){
-        let alertController = UIAlertController(title: "Passcode", message: "Please input passcode:", preferredStyle: .alert)
+        let alertController = UIAlertController(title: MultiLanguague.passcode, message: MultiLanguague.inputPasscode, preferredStyle: .alert)
         
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: MultiLanguague.confirm, style: .default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
                 if let field2 = alertController.textFields![1] as? UITextField {
                     if field.text == field2.text {
@@ -132,18 +133,18 @@ class SettingVC: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let cancelAction = UIAlertAction(title: MultiLanguague.cancel, style: .cancel) { (_) in
             completion(false)
         }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "Passcode:"
+            textField.placeholder = MultiLanguague.passcode
             textField.isSecureTextEntry = true
             textField.keyboardType = .numberPad
         }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "Confirm passcode:"
+            textField.placeholder = MultiLanguague.confirmPasscode
             textField.isSecureTextEntry = true
             textField.keyboardType = .numberPad
         }
@@ -156,9 +157,9 @@ class SettingVC: UIViewController {
     
     //MARK: show lock alert
     func showConfirmPasscode(completion: @escaping (Bool) -> Swift.Void){
-        let alertController = UIAlertController(title: "Passcode", message: "Please input passcode:", preferredStyle: .alert)
+        let alertController = UIAlertController(title: MultiLanguague.passcode, message: MultiLanguague.inputPasscode, preferredStyle: .alert)
         
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: MultiLanguague.confirm, style: .default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
                 if field.text == Other.passcode {
                     Other.passcode = field.text!
@@ -172,12 +173,12 @@ class SettingVC: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let cancelAction = UIAlertAction(title: MultiLanguague.cancel, style: .cancel) { (_) in
             completion(false)
         }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "Passcode:"
+            textField.placeholder = MultiLanguague.passcode
             textField.isSecureTextEntry = true
             textField.keyboardType = .numberPad
         }

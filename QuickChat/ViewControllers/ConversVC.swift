@@ -28,6 +28,12 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    func setLanguague(){
+        DispatchQueue.main.async {
+            self.navigationItem.title = MultiLanguague.messageItem
+        }
+    }
+    
     //MARK: *** Custom Functions
     //Download all conversation
     func fetchData() {
@@ -144,6 +150,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.setLanguague()
         super.viewWillAppear(animated)
         if allowPush == true {
         }

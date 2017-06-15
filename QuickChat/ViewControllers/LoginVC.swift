@@ -25,9 +25,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btnSignIn: RoundedButton!
     @IBOutlet weak var btnCreateAccount: UIButton!
     
-    func setLanguague(lang: Int){
-        MultiLanguague.languague = lang
-        MultiLanguague.update()
+    func setLanguague(){
         
         DispatchQueue.main.async {
             self.lblLogin.text = MultiLanguague.loginStr
@@ -52,7 +50,7 @@ class LoginVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setLanguague(lang: MultiLanguague.languague)
+        setLanguague()
     }
     
     override func viewDidLoad() {
