@@ -62,6 +62,7 @@ class SettingVC: UIViewController {
                 showInputPasscode(completion: {(ok) in
                     if ok == true {
                         Other.useTouchID = true
+                        self.showAlertFail(title: "Success", message: "Please restart app to use passcode")
                     }
                     else {
                         Other.useTouchID = false
@@ -78,6 +79,7 @@ class SettingVC: UIViewController {
                 showConfirmPasscode(completion: {(ok) in
                     if ok == true {
                         Other.useTouchID = false
+                        self.showAlertFail(title: "Success", message: "Please restart app to not use passcode")
                     }
                     else {
                         Other.useTouchID = true

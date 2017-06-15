@@ -61,14 +61,48 @@ class Conversation {
         self.locked = locked
     }
     
+    //MARK: Delete
+    //MARK: Methods
+    class func delete(conv:Conversation, completion: @escaping (Bool) -> Swift.Void) {
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(conv.user.id).removeValue(completionBlock: { (error, ref) in
+                if error == nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            })
+        }
+        else {
+            completion(false)
+        }
+    }
     
     
+    //MARK: Lock
     class func checkLocked(uid: String, completion: @escaping (Bool) -> Swift.Void) {
         if FIRAuth.auth()?.currentUser?.uid != nil {
             FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("conversations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let data = snapshot.value as? [String: String] {
                     let locked = data["locked"] != nil && data["locked"] == "1" ? true : false
                     completion(locked)
+                }
+                else {
+                    completion(false)
+                }
+            })
+        }
+        else {
+            completion(false)
+        }
+    }
+    
+    class func setLocked(uid: String, locked: Bool, completion: @escaping (Bool) -> Swift.Void) {
+        if FIRAuth.auth()?.currentUser?.uid != nil {
+            let values = ["locked": locked ? "1" : "0"]
+            FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("conversations").child(uid).updateChildValues(values, withCompletionBlock: { (errr, _) in
+                if errr == nil {
+                    completion(true)
                 }
                 else {
                     completion(false)
