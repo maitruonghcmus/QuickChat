@@ -48,6 +48,11 @@ class SettingVC: UIViewController {
         self.setLanguague(lang: MultiLanguague.languague)
     }
     
+    
+    @IBAction func btnRestoreDefault_Tapped(_ sender: Any) {
+        self.setLanguague(lang: 1)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         switchTouchID.setOn(Other.useTouchID, animated: true)
