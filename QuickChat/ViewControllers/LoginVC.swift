@@ -1,11 +1,3 @@
-//
-//  LoginVC.swift
-//  QuickChat
-//
-//  Created by Truong Mai on 5/23/17.
-//  Copyright © 2017 Mexonis. All rights reserved.
-//
-
 import UIKit
 
 class LoginVC: UIViewController {

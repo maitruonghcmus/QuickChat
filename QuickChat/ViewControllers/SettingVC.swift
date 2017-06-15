@@ -1,11 +1,3 @@
-//
-//  SettingVC.swift
-//  QuickChat
-//
-//  Created by An Le on 6/15/17.
-//  Copyright © 2017 Mexonis. All rights reserved.
-//
-
 import UIKit
 
 class SettingVC: UIViewController {

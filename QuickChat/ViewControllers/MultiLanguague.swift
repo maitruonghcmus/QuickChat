@@ -1,11 +1,3 @@
-//
-//  MultiLanguague.swift
-//  QuickChat
-//
-//  Created by Truong Mai on 6/15/17.
-//  Copyright © 2017 Mexonis. All rights reserved.
-//
-
 import UIKit
 import Foundation
 

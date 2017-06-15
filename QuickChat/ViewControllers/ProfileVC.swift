@@ -1,11 +1,3 @@
-//
-//  ProfileVC.swift
-//  QuickChat
-//
-//  Created by Truong Mai on 5/24/17.
-//  Copyright © 2017 Mexonis. All rights reserved.
-//
-
 import UIKit
 import Firebase
 
