@@ -14,13 +14,13 @@ class LandingVC: UIViewController {
         switch viewController {
         case .tabbar:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabVC") as! TabVC
-            self.present(vc, animated: false, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         case .login:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-            self.present(vc, animated: false, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         default:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-            self.present(vc, animated: false, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

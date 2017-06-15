@@ -104,6 +104,19 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let unlock = UITableViewRowAction(style: .normal, title: "Unlock") { action, index in
+            
+        }
+        
+        let lock = UITableViewRowAction(style: .destructive, title: "Lock") { action, index in
+            
+        }
+        
+        return [unlock, lock]
+    }
+    
     //MARK: *** Search Bar
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
