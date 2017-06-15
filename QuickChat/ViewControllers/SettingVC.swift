@@ -19,6 +19,8 @@ class SettingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switchTouchID.setOn(Other.useTouchID, animated: true)
+        switchNotification.setOn(Other.useNotification, animated: true)
         switchTouchID.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
         switchNotification.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
     }
@@ -29,31 +31,46 @@ class SettingVC: UIViewController {
             if sender.isOn == true {
                 showInputPasscode(completion: {(ok) in
                     if ok == true {
-                        Other.useTouchID = sender.isOn
+                        Other.useTouchID = true
                     }
                     else {
+                        Other.useTouchID = false
                         self.showAlertFail(title: "Error", message: "Passcode not same")
                     }
+                    self.switchTouchID.setOn(Other.useTouchID, animated: true)
+                    Other.update(completion: {(ok) in
+                        if ok == false {
+                            self.showAlertFail(title: "Error", message: "Have error, please try again")
+                        }
+                    })
                 })
             } else {
                 showConfirmPasscode(completion: {(ok) in
                     if ok == true {
-                        Other.useTouchID = sender.isOn
+                        Other.useTouchID = false
                     }
                     else {
+                        Other.useTouchID = true
                         self.showAlertFail(title: "Error", message: "Wrong passcode")
                     }
+                    self.switchTouchID.setOn(Other.useTouchID, animated: true)
+                    Other.update(completion: {(ok) in
+                        if ok == false {
+                            self.showAlertFail(title: "Error", message: "Have error, please try again")
+                        }
+                    })
                 })
             }
         }
         if (sender == switchNotification) {
             Other.useNotification = sender.isOn
+            Other.update(completion: {(ok) in
+                if ok == false {
+                    self.showAlertFail(title: "Error", message: "Have error, please try again")
+                }
+            })
         }
-        Other.update(completion: {(ok) in
-            if ok == false {
-                self.showAlertFail(title: "Error", message: "Have error, please try again")
-            }
-        })
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,7 +100,9 @@ class SettingVC: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            completion(false)
+        }
         
         alertController.addTextField { (textField) in
             textField.placeholder = "Passcode:"
@@ -121,7 +140,9 @@ class SettingVC: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            completion(false)
+        }
         
         alertController.addTextField { (textField) in
             textField.placeholder = "Passcode:"
