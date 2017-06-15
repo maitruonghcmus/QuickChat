@@ -21,6 +21,8 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var imgProfile: RoundedImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var btnLogout: RoundedButton!
+    
     
     //Downloads current user credentials
     func fetchUserInfo() {

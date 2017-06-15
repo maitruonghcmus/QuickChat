@@ -23,6 +23,7 @@ class RegisterVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var lblMessage: UILabel!
+    
 
     let imagePicker = UIImagePickerController()
     

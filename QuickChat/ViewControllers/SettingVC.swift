@@ -13,9 +13,39 @@ class SettingVC: UIViewController {
     @IBOutlet weak var switchNotification: UISwitch!
     @IBOutlet weak var switchTouchID: UISwitch!
     @IBOutlet weak var lblLanguague: UILabel!
+    @IBOutlet weak var lblNotification: UILabel!
+    @IBOutlet weak var lblTouchIDPasscode: UILabel?
+    @IBOutlet weak var btnRestoreDefault: UIButton!
+    
     
     var isNotificationOn = false
     var isTouchIdOn = false
+    
+    func setLanguague(lang: Int){
+        MultiLanguague.languague = lang
+        MultiLanguague.update()
+        
+        DispatchQueue.main.async {
+            self.lblLanguague.text = MultiLanguague.settingLanguague
+            self.lblNotification.text = MultiLanguague.settingNotification
+            self.lblTouchIDPasscode?.text = MultiLanguague.settingTouchIDPasscode
+            self.btnRestoreDefault.setTitle(MultiLanguague.settingRestoreDefaul, for: .normal)
+            self.navigationItem.title = MultiLanguague.settingTitle
+            self.tabBarItem.title = "abbb"
+        }
+    }
+
+    @IBAction func btnEn_Tapped(_ sender: Any) {
+        self.setLanguague(lang: 1)
+    }
+    
+    @IBAction func btnVietnamese_Tapped(_ sender: Any) {
+        self.setLanguague(lang: 2)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setLanguague(lang: MultiLanguague.languague)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -14,39 +14,67 @@ enum Languague {
     case vietnamese
 }
 
-final class MultiLanguague : NSObject {
+final class MultiLanguague {
     
-    static let Instance = MultiLanguague()
+    static var languague = 1
     
-    var languague : Languague
-    
-    private override init() {
-        languague = .vietnamese
+    private init() {
+        MultiLanguague.languague = 1
     }
     
     //MARK: Login view resource
-    var loginStr = Instance.languague == .english ? "Login" : "Đăng nhập"
-    var emailStr = Instance.languague == .english ? "Email" : "Email"
-    var passwordStr = Instance.languague == .english ? "Password" : "Mật khẩu"
-    var errLoginStr = Instance.languague == .english ? "Wrong input params, please try again" : "Sai tên đăng nhập hoặc mật khẩu"
-    var signInBtnStr = Instance.languague == .english ? "Sign In" : "Đăng nhập"
-    var createAccBtnStr = Instance.languague == .english ? "Create new account" : "Tạo tài khoản mới"
+    static var loginStr = "Login"
+    static var emailStr =  "Email"
+    static var passwordStr = "Password"
+    static var errLoginStr = "Wrong input params, please try again"
+    static var signInBtnStr = "Sign In"
+    static var createAccBtnStr =  "Create new account"
     
     //MARK: message
-    var messageItem = Instance.languague == .english ? "Messages" : "Tin nhan"
+    static var messageItem =  "Messages"
     
     //MARK: Contact
-    var contactItem  = Instance.languague == .english ? "Contacts" : "Danh ba"
+    static var contactItem  =  "Contacts"
     
     //MARK: Profile
-    var profileBtnLogout  = Instance.languague == .english ? "Log Out" : "Dang Xuat"
-    var profileItem  = Instance.languague == .english ? "Profile" : "Ho so"
+    static var profileBtnLogout  =  "Log Out"
+    static var profileItem  = "Profile"
     
     //MARK: Setting
-    var settingNotification = Instance.languague == .english ? "Notification" : "Thong bao"
-    var settingTouchIDPasscode = Instance.languague == .english ? "Touch ID & Passcode" : "Van tay va mat khau"
-    var settingLanguague = Instance.languague == .english ? "Language: English" : "Ngon ngu: Tieng Viet"
-    var settingRestoreDefaul = Instance.languague == .english ? "Restore Default Setting" : "Khoi phuc cai dat goc"
+    static var settingNotification = "Notification"
+    static var settingTouchIDPasscode = "Touch ID & Passcode"
+    static var settingLanguague =  "Language: English"
+    static var settingRestoreDefaul =  "Restore Default Setting"
+    static var settingTitle =  "Setting"
     
-    //var  = Instance.languague == .english ? "" : ""
+    
+    
+    static func update(){
+        //MARK: Login view resource
+        loginStr = languague == 1 ? "Login" : "Đăng nhập"
+        emailStr = languague == 1 ? "Email" : "Email"
+        passwordStr = languague == 1 ? "Password" : "Mật khẩu"
+        errLoginStr = languague == 1 ? "Wrong input params, please try again" : "Sai tên đăng nhập hoặc mật khẩu"
+        signInBtnStr = languague == 1 ? "Sign In" : "Đăng nhập"
+        createAccBtnStr = languague == 1 ? "Create new account" : "Tạo tài khoản mới"
+        
+        //MARK: message
+        messageItem = languague == 1 ? "Messages" : "Tin nhan"
+        
+        //MARK: Contact
+        contactItem  = languague == 1 ? "Contacts" : "Danh ba"
+        
+        //MARK: Profile
+        profileBtnLogout  = languague == 1 ? "Log Out" : "Dang Xuat"
+        profileItem  = languague == 1 ? "Profile" : "Ho so"
+        
+        //MARK: Setting
+        settingNotification = languague == 1 ? "Notification" : "Thong bao"
+        settingTouchIDPasscode = languague == 1 ? "Touch ID & Passcode" : "Van tay va mat khau"
+        settingLanguague = languague == 1 ? "Language: English" : "Ngon ngu: Tieng Viet"
+        settingRestoreDefaul = languague == 1 ? "Restore Default Setting" : "Khoi phuc cai dat goc"
+        settingTitle = languague == 1 ? "Setting" : "Cai dat"
+    }
+    
+    //var  = Instance.languague == 1 ? "" : ""
 }

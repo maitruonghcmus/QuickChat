@@ -22,16 +22,21 @@ class LoginVC: UIViewController {
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var lblErrMessage: UILabel!
-//    @IBOutlet weak var btnSignIn: RoundedButton!
-//    @IBOutlet weak var btnCreateAccount: UIButton!
+    @IBOutlet weak var btnSignIn: RoundedButton!
+    @IBOutlet weak var btnCreateAccount: UIButton!
     
-    func setLanguague(){
-        lblLogin.text = MultiLanguague.Instance.loginStr
-        txtEmail.placeholder = MultiLanguague.Instance.emailStr
-        txtPassword.placeholder = MultiLanguague.Instance.passwordStr
-        lblMessage.text = MultiLanguague.Instance.errLoginStr
-//        btnSignIn.setTitle(MultiLanguague.Instance.signInBtnStr, for: .normal)
-//        btnCreateAccount.setTitle(MultiLanguague.Instance.createAccBtnStr, for: .normal)
+    func setLanguague(lang: Int){
+        MultiLanguague.languague = lang
+        MultiLanguague.update()
+        
+        DispatchQueue.main.async {
+            self.lblLogin.text = MultiLanguague.loginStr
+            self.txtEmail.placeholder = MultiLanguague.emailStr
+            self.txtPassword.placeholder = MultiLanguague.passwordStr
+            self.lblMessage.text = MultiLanguague.errLoginStr
+            //self.btnSignIn.setTitle(MultiLanguague.signInBtnStr, for: .normal)
+            //self.btnCreateAccount.setTitle(MultiLanguague.createAccBtnStr, for: .normal)
+        }
     }
     
     func pushTomainView() {
@@ -47,12 +52,11 @@ class LoginVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        setLanguague()
+        setLanguague(lang: MultiLanguague.languague)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

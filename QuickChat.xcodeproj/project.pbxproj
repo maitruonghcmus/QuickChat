@@ -87,7 +87,6 @@
 		224834AF1DB539690019153C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				112224B61EF26D60008143DE /* MultiLanguague.swift */,
 				224834B01DB539A50019153C /* User.swift */,
 				22873DA91DC790550021690E /* Message.swift */,
 				22B974BF1DE9B5DF00E09490 /* Conversation.swift */,
@@ -100,6 +99,7 @@
 		224AFA9E1D868371004E7CCD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				112224B61EF26D60008143DE /* MultiLanguague.swift */,
 				2274709D1DCCF9BF00645401 /* LandingVC.swift */,
 				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
 				22A5FC5E1DEB185B00624E2B /* NavVC.swift */,

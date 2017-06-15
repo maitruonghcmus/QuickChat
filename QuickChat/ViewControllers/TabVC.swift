@@ -24,7 +24,10 @@ class TabVC: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        tabBar.items?[0].title = "Number 0"
+        tabBar.items?[1].title = "Number 1"
+        tabBar.items?[2].title = "Number 2"
+        tabBar.items?[3].title = "Number 3"
     }
     
     override func viewDidLoad() {

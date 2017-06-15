@@ -1652,6 +1652,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="vyw-lb-TsL"/>
                     <connections>
+                        <outlet property="btnLogout" destination="ukR-S9-1i6" id="uzm-Up-7Os"/>
                         <outlet property="imgProfile" destination="DpD-LH-WYS" id="ZNv-2F-e2o"/>
                         <outlet property="lblEmail" destination="0jV-J5-bZW" id="ryU-Mb-kyg"/>
                         <outlet property="lblName" destination="L9N-SG-46Q" id="J45-w9-N5H"/>
@@ -1706,11 +1707,17 @@
                                 <rect key="frame" x="16" y="244" width="288" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="English"/>
+                                <connections>
+                                    <action selector="btnEn_Tapped:" destination="RpU-e4-8uB" eventType="touchUpInside" id="zqE-y6-F05"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofD-Xo-DI2">
                                 <rect key="frame" x="16" y="282" width="288" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Vietnamese"/>
+                                <connections>
+                                    <action selector="btnVietnamese_Tapped:" destination="RpU-e4-8uB" eventType="touchUpInside" id="sPf-fR-yum"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AnK-BA-ge6">
                                 <rect key="frame" x="16" y="121" width="304" height="1"/>
@@ -1739,7 +1746,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Setting" id="wPL-MZ-ny4"/>
                     <connections>
+                        <outlet property="btnRestoreDefault" destination="8Pt-Vh-Qpu" id="sC5-3H-pn1"/>
                         <outlet property="lblLanguague" destination="FEX-QN-BWY" id="8P5-ZF-etU"/>
+                        <outlet property="lblNotification" destination="stf-8b-FCz" id="evd-oZ-zaD"/>
+                        <outlet property="lblTouchIDPasscode" destination="G38-fG-Dz9" id="FOc-bz-vZ9"/>
                         <outlet property="switchNotification" destination="gL0-MM-Gp2" id="rVi-2r-aS9"/>
                         <outlet property="switchTouchID" destination="b52-4U-f2f" id="81S-vv-tHU"/>
                     </connections>
