@@ -79,4 +79,21 @@ class Conversation {
             completion(false)
         }
     }
+    
+    class func setLocked(uid: String, locked: Bool, completion: @escaping (Bool) -> Swift.Void) {
+        if FIRAuth.auth()?.currentUser?.uid != nil {
+            let values = ["locked": locked ? "1" : "0"]
+            FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("conversations").child(uid).updateChildValues(values, withCompletionBlock: { (errr, _) in
+                if errr == nil {
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+            })
+        }
+        else {
+            completion(false)
+        }
+    }
 }

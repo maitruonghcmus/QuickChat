@@ -105,16 +105,35 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let unlock = UITableViewRowAction(style: .normal, title: "Unlock") { action, index in
-            
+        if self.filtered.count > 0 && Other.useTouchID == true {
+            self.selectedUser = filtered[indexPath.row]
+            let unlock = UITableViewRowAction(style: .normal, title: "Unlock") { action, index in
+                self.showAlert(completion: {(ok) in
+                    if ok == true {
+                        Conversation.setLocked(uid: (self.selectedUser?.id)!, locked: false, completion: { (ok) in
+                            if ok == true {
+                                self.showAlert(title: "Sucess", message: "Unlock success")
+                            } else {
+                                self.showAlert(title: "Fail", message: "Unlock fail. Try again")
+                            }
+                        })
+                    } else {
+                        self.showAlertFail()
+                    }
+                })
+            }
+            let lock = UITableViewRowAction(style: .destructive, title: "Lock") { action, index in
+                Conversation.setLocked(uid: (self.selectedUser?.id)!, locked: true, completion: { (ok) in
+                    if ok == true {
+                        self.showAlert(title: "Sucess", message: "Lock success")
+                    } else {
+                        self.showAlert(title: "Fail", message: "Lock fail. Try again")
+                    }
+                })
+            }
+            return [unlock, lock]
         }
-        
-        let lock = UITableViewRowAction(style: .destructive, title: "Lock") { action, index in
-            
-        }
-        
-        return [unlock, lock]
+        return []
     }
     
     //MARK: *** Search Bar
@@ -184,6 +203,15 @@ class ContactVC: UITableViewController, UISearchBarDelegate {
     
     func showAlertFail() {
         let alertVC = UIAlertController(title: "Passcode", message: "Wrong passcode", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertVC.addAction(okAction)
+        DispatchQueue.main.async() { () -> Void in
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertVC.addAction(okAction)
         DispatchQueue.main.async() { () -> Void in
