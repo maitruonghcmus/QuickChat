@@ -8,43 +8,52 @@
 
 import UIKit
 
-class SettingVC: UITableViewController {
+class SettingVC: UIViewController {
+    
+    @IBOutlet weak var switchNotification: UISwitch!
+    @IBOutlet weak var switchTouchID: UISwitch!
+    @IBOutlet weak var lblLanguague: UILabel!
+    
+    var isNotificationOn = false
+    var isTouchIdOn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        switchTouchID.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
-//        switchNotification.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
+        switchTouchID.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
+        switchNotification.addTarget(self, action: #selector(switchValueDidChange), for: .valueChanged)
     }
+    
     func switchValueDidChange(sender:UISwitch!){
-//        if (sender == switchTouchID) {
-//            if sender.isOn == true {
-//                showInputPasscode(completion: {(ok) in
-//                    if ok == true {
-//                        Other.useTouchID = sender.isOn
-//                    }
-//                    else {
-//                        self.showAlertFail(title: "Error", message: "Passcode not same")
-//                    }
-//                })
-//            } else {
-//                showConfirmPasscode(completion: {(ok) in
-//                    if ok == true {
-//                        Other.useTouchID = sender.isOn
-//                    }
-//                    else {
-//                        self.showAlertFail(title: "Error", message: "Wrong passcode")
-//                    }
-//                })
-//            }
-//        }
-//        if (sender == switchNotification) {
-//            Other.useNotification = sender.isOn
-//        }
-//        Other.update(completion: {(ok) in
-//            if ok == false {
-//                self.showAlertFail(title: "Error", message: "Have error, please try again")
-//            }
-//        })
+        
+        if (sender == switchTouchID) {
+            if sender.isOn == true {
+                showInputPasscode(completion: {(ok) in
+                    if ok == true {
+                        Other.useTouchID = sender.isOn
+                    }
+                    else {
+                        self.showAlertFail(title: "Error", message: "Passcode not same")
+                    }
+                })
+            } else {
+                showConfirmPasscode(completion: {(ok) in
+                    if ok == true {
+                        Other.useTouchID = sender.isOn
+                    }
+                    else {
+                        self.showAlertFail(title: "Error", message: "Wrong passcode")
+                    }
+                })
+            }
+        }
+        if (sender == switchNotification) {
+            Other.useNotification = sender.isOn
+        }
+        Other.update(completion: {(ok) in
+            if ok == false {
+                self.showAlertFail(title: "Error", message: "Have error, please try again")
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
