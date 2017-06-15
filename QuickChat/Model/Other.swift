@@ -29,6 +29,8 @@ class Other: NSObject {
                     completion(false)
                 }
             })
+        } else {
+            completion(false)
         }
     }
     

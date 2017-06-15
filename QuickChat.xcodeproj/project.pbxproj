@@ -14,7 +14,6 @@
 		117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE41ED53B0B00067713 /* ProfileVC.swift */; };
 		117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DDDE61ED53CFE00067713 /* TabVC.swift */; };
 		11EE29361EE7A5D800E228E8 /* TouchIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */; };
-		11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */; };
 		11FAB6BD1ED422AB00299AD0 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */; };
 		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
 		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
@@ -34,6 +33,7 @@
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 		8F4AB2561EF1819C001DE437 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AB2551EF1819C001DE437 /* Other.swift */; };
 		8F4AB2581EF1A5AB001DE437 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4AB2571EF1A5AB001DE437 /* SettingVC.swift */; };
+		8F59B6531EF2B3CE00A54C7A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59B6521EF2B3CE00A54C7A /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,6 @@
 		117DDDE41ED53B0B00067713 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = QuickChat/ViewControllers/ProfileVC.swift; sourceTree = "<group>"; };
 		117DDDE61ED53CFE00067713 /* TabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabVC.swift; path = QuickChat/ViewControllers/TabVC.swift; sourceTree = "<group>"; };
 		11EE29351EE7A5D800E228E8 /* TouchIDVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDVC.swift; path = QuickChat/ViewControllers/TouchIDVC.swift; sourceTree = "<group>"; };
-		11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
 		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		8F4AB2551EF1819C001DE437 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Other.swift; path = QuickChat/Model/Other.swift; sourceTree = "<group>"; };
 		8F4AB2571EF1A5AB001DE437 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = QuickChat/ViewControllers/SettingVC.swift; sourceTree = "<group>"; };
 		8F520BBC1EDB4922006AD9E2 /* QuickChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickChat.entitlements; sourceTree = "<group>"; };
+		8F59B6521EF2B3CE00A54C7A /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = QuickChat/ViewControllers/LoginVC.swift; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,7 +106,7 @@
 				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
 				22EA57901E1D32520008FFB2 /* VCCells.swift */,
-				11FAB6BA1ED4228B00299AD0 /* LoginVC.swift */,
+				8F59B6521EF2B3CE00A54C7A /* LoginVC.swift */,
 				11FAB6BC1ED422AB00299AD0 /* RegisterVC.swift */,
 				117DDDE01ED53A6500067713 /* ConversVC.swift */,
 				117DDDE21ED53AC900067713 /* ContactVC.swift */,
@@ -337,8 +337,8 @@
 			files = (
 				112224B71EF26D60008143DE /* MultiLanguague.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
+				8F59B6531EF2B3CE00A54C7A /* LoginVC.swift in Sources */,
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
-				11FAB6BB1ED4228B00299AD0 /* LoginVC.swift in Sources */,
 				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
 				117DDDE71ED53CFE00067713 /* TabVC.swift in Sources */,
 				117DDDE51ED53B0B00067713 /* ProfileVC.swift in Sources */,
