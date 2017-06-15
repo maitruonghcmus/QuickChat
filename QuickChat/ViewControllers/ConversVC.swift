@@ -49,7 +49,7 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
                     let state = UIApplication.shared.applicationState
                     
                     if state == .background {
-                        if Other.useNotification == true && conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
+                        if Other.useNotification == true && conversation.locked == false && conversation.lastMessage.isRead == false && conversation.lastMessage.owner == .sender {
                             self.pushNotification(conv: conversation)
                         }
                     }
@@ -227,14 +227,31 @@ class ConversVC: UITableViewController, UISearchBarDelegate {
     }
     
     // Override to support editing the table view.
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            if self.filtered.count > 0 {
+                self.selectedUser = self.filtered[indexPath.row].user
+                let currentItem = filtered[indexPath.row]
+                Conversation.delete(conv: currentItem, completion: {(ok) in
+                    if ok == true {
+                        UIApplication.shared.applicationIconBadgeNumber -= 1
+                        self.filtered.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    } else {
+                        let alertVC = UIAlertController(title: "Fail", message: "Please try again", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        alertVC.addAction(okAction)
+                        DispatchQueue.main.async() { () -> Void in
+                            self.present(alertVC, animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
     //MARK: *** Search Bar
     
